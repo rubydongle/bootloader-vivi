@@ -1,0 +1,90 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_name "Linux Kernel Configuration"
+
+mainmenu_option next_comment
+comment 'System Type'
+
+choice 'ARM system type' \
+  "SA1100-based		CONFIG_ARCH_SA1100 \
+   PXA250/210-based	CONFIG_ARCH_PXA250 \
+   S3C2400-based	CONFIG_ARCH_S3C2400 \
+   S3C2410-based	CONFIG_ARCH_S3C2410 \
+   S3C2440-based	CONFIG_ARCH_S3C2440 "
+
+mainmenu_option next_comment
+comment 'Implementations'
+if [ "$CONFIG_ARCH_S3C2400" = "y" ]; then
+  choice 'Platform' \
+    "SMDK	CONFIG_S3C2400_SMDK \
+     GAMEPARK	CONFIG_S3C2400_GAMEPARK"
+  if [ "$CONFIG_S3C2400_GAMEPARK" = "y" ]; then
+    bool '    Support OS Switching' CONFIG_S3C2400_GAMEPARK_OSSWITCH
+    bool '    Run in the RAM' CONFIG_S3C2400_GAMEPARK_ON_RAM
+  fi
+fi
+
+if [ "$CONFIG_ARCH_S3C2410" = "y" ]; then
+  choice 'Platform' \
+    "SMDK	CONFIG_S3C2410_SMDK \
+     MPORT3	CONFIG_S3C2410_MPORT3"
+  if [ "$CONFIG_S3C2410_SMDK" = "y" ]; then
+    bool '  Support NAND Boot' CONFIG_S3C2410_NAND_BOOT
+    bool '  Support AMD Boot' CONFIG_S3C2410_AMD_BOOT
+  fi
+fi
+
+if [ "$CONFIG_ARCH_S3C2440" = "y" ]; then
+  choice 'Platform' \
+    "SMDK	CONFIG_S3C2440_SMDK \
+     MPORT3	CONFIG_S3C2440_MPORT3"
+  if [ "$CONFIG_S3C2440_SMDK" = "y" ]; then
+    bool '  Support NAND Boot' CONFIG_S3C2440_NAND_BOOT
+    bool '  Support AMD Boot' CONFIG_S3C2440_AMD_BOOT
+  fi
+fi
+
+endmenu
+endmenu
+
+mainmenu_option next_comment
+comment 'General setup'
+
+bool 'Define TEXT Address' CONFIG_VIVI_ADDR
+hex 'vivi base address' CONFIG_VIVI_TEXTADDR 0
+bool 'support reset handler' CONFIG_RESET_HANDLING
+
+comment 'CACHE Enable'
+bool '  I-Cache on' CONFIG_CPU_D_CACHE_ON
+bool '  D-Cache on' CONFIG_CPU_I_CACHE_ON
+
+comment 'Power Mangement'
+bool '  Support power management' CONFIG_PM
+
+comment 'Others'
+bool '  Display progress bar' CONFIG_MSG_PROGRESS
+
+
+endmenu # end 'General setup'
+
+source lib/priv_data/Config.in
+source drivers/serial/Config.in
+source drivers/mtd/Config.in
+source lib/Config_cmd.in
+
+mainmenu_option next_comment
+comment 'System hacking'
+bool ' Support test mode' CONFIG_TEST_MODE
+bool ' Debugging' CONFIG_DEBUG
+if [ "$CONFIG_DEBUG" = "y" ]; then
+  int '  Debugging verbosity (0 = quiet, 3 = noisy)' CONFIG_DEBUG_VERBOSE 0
+fi
+endmenu
+
+mainmenu_option next_commet
+comment 'Debugging messages'
+bool ' VIVI low-level debugging functions' CONFIG_DEBUG_LL
+dep_bool ' Enable CFI debug messages' CONFIG_DEBUG_CFI $CONFIG_MTD_CFI
+endmenu

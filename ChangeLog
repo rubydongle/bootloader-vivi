@@ -1,0 +1,13 @@
+rel-1-0-0 laputa:  this is 1'st version vivi boot loader (2004.02.04.)
+                     - it is bootloader for s3c2440 eval board on nand boot
+                     - 0:192k:2M partition block source
+                     - You must be checked a system freq.(cf:406MHz,540MHz....etc.) --> "include/platform/smdk2440.h"
+                     - default menuconfiguration file :"arch/def-configs/smdk2440"
+                     - default CPU freq : 406MHz-135MHz-67MHz
+                        ~ vivi> bon part 0 192k 2M 
+                        ~ kernel $> imagewrite /dev/mtd/0 zImage:192k
+                        ~ kernel $> imagewrite /dev/mtd/0 rootcramfs:2M
+                     - to be changed the vivi kernel size & root start address
+rel-1-0-1 laputa:  to be changed the vivi kernel size & root start address
+                     - kernel size       : 1d00 0000
+					 - root start addres : 0020 0000

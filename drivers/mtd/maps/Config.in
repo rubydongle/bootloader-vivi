@@ -1,0 +1,14 @@
+# drivers/mtd/maps/Config.in
+
+# $Id: Config.in,v 1.1.1.1 2004/02/04 06:22:25 laputa Exp $
+
+mainmenu_option next_comment
+
+comment 'Mapping drivers for chip access'
+
+dep_bool 'Flash device mapped on StrongARM SA11x0' CONFIG_MTD_SA1100 $CONFIG_MTD_CFI $CONFIG_ARCH_SA1100
+dep_bool 'Flash device mapped on S3C2400' CONFIG_MTD_S3C2400 $CONFIG_MTD_CFI $CONFIG_ARCH_S3C2400
+dep_bool 'Flash device mapped on S3C2410' CONFIG_MTD_S3C2410 $CONFIG_ARCH_S3C2410
+dep_bool 'Flash device mapped on S3C2440' CONFIG_MTD_S3C2440 $CONFIG_ARCH_S3C2440
+
+endmenu

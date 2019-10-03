@@ -1,0 +1,3 @@
+imagewrite.c ecc.c : 
+    Nand flash writing tool made by Hwang, mizi.
+    Compile imagewrite.c

@@ -1,0 +1,6 @@
+#define UTS_VERSION "#0.1.4 Tue Jun 30 12:13:38 CST 2009"
+#define VIVI_COMPILE_TIME "12:13:38"
+#define VIVI_COMPILE_BY "root"
+#define VIVI_COMPILE_HOST "russell-linux-vpc"
+#define VIVI_COMPILE_DOMAIN ""
+#define VIVI_COMPILER "gcc version 2.95.3 20010315 (release)"
